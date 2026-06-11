@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>创造者生命说明书 | Creator OS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --ink: #1a1a18;
+      --warm-black: #1f1f1c;
+      --charcoal: #2d2d2a;
+      --page: #fafaf7;
+      --warm-page: #f4f2ed;
+      --cream: #ede8df;
+      --stone: #d5d0c8;
+      --ash: #8a857c;
+      --slate: #6b6660;
+      --dust: #a8a39b;
+      --oxide: #c44e3a;
+      --gold: #b8943e;
+      --sage: #7a9a8e;
+      --ink-line: rgba(26, 26, 24, 0.07);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 40px rgba(0,0,0,0.05);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,0.07);
+      --serif: "EB Garamond", "Times New Roman", "Songti SC", "Noto Serif SC", serif;
+      --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--sans);background:var(--page);color:var(--ink);line-height:1.7;font-size:15px;font-weight:400;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button,a,input{font:inherit;cursor:pointer}
+
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(20px,4vw,48px);transition:background 400ms ease,box-shadow 400ms ease,color 400ms ease;color:var(--page);mix-blend-mode:difference}
+    .site-nav.scrolled{background:rgba(250,250,247,0.86);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--ink-line);color:var(--ink);mix-blend-mode:normal}
+    .site-nav.scrolled .nav-links a{color:var(--ink)}
+    .site-nav.scrolled .nav-links{border-color:var(--ink-line);background:transparent}
+    .brand{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:inherit}
+    .brand em{display:block;font-family:var(--serif);font-size:20px;font-style:italic;letter-spacing:0;text-transform:none;font-weight:400;margin-top:1px}
+    .nav-links{display:flex;gap:1px;padding:4px;border:1px solid rgba(250,250,247,0.14);background:rgba(31,31,28,0.3);backdrop-filter:blur(12px);transition:border-color 400ms ease,background 400ms ease}
+    .nav-links a{display:inline-flex;align-items:center;min-height:30px;padding:0 14px;font-size:12px;font-weight:400;color:rgba(250,250,247,0.6);text-decoration:none;transition:color 200ms ease,background 200ms ease;letter-spacing:0.02em}
+    .nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--page)}
+
+    .hero{min-height:100svh;display:flex;align-items:center;padding:120px clamp(20px,5vw,64px) 80px;background:var(--warm-black);position:relative;isolation:isolate;overflow:hidden}
+    #hero-canvas{position:absolute;inset:0;z-index:1;opacity:0.55}
+    .hero-content{position:relative;z-index:2;max-width:880px}
+    .hero-kicker{letter-spacing:0.22em;text-transform:uppercase;color:var(--sage);font-size:11px;font-weight:500;margin-bottom:32px}
+    .hero h1{font-family:var(--serif);font-size:clamp(52px,8vw,112px);font-weight:400;line-height:0.94;color:var(--page);letter-spacing:-0.01em}
+    .hero h1 i{display:block;font-style:italic;color:var(--sage);font-size:0.38em;line-height:1.1;margin-top:12px;letter-spacing:0}
+    .hero-thesis{max-width:560px;font-size:clamp(14px,1.5vw,17px);line-height:1.7;color:rgba(250,250,247,0.58);margin-top:36px;font-weight:300;border-left:1px solid rgba(250,250,247,0.16);padding-left:18px}
+
+    .section{padding:clamp(72px,10vw,140px) clamp(20px,5vw,64px);max-width:1120px;margin:0 auto}
+    .section-alt{background:var(--warm-page);padding:clamp(72px,10vw,140px) clamp(20px,5vw,64px);max-width:none}
+    .section-alt>.section-inner{max-width:1120px;margin:0 auto}
+    .section-label{letter-spacing:0.2em;text-transform:uppercase;font-size:10px;font-weight:500;color:var(--ash);margin-bottom:16px}
+    .section h2{font-family:var(--serif);font-size:clamp(34px,4.5vw,56px);font-weight:400;line-height:1.12;margin-bottom:28px;letter-spacing:-0.01em}
+    .section-lead{max-width:620px;font-size:17px;color:var(--slate);line-height:1.7;margin-bottom:60px;font-weight:300}
+
+    .philosophy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,40px)}
+    @media(max-width:800px){.philosophy-grid{grid-template-columns:1fr}}
+    .phil-item{padding:40px 32px 36px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .phil-item:hover{border-color:var(--stone)}
+    .phil-item .phil-num{font-family:var(--serif);font-size:56px;color:var(--cream);line-height:0.85;margin-bottom:20px;font-style:italic}
+    .phil-item h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:10px;letter-spacing:-0.01em}
+    .phil-item p{font-size:14px;color:var(--slate);line-height:1.65;font-weight:300}
+
+    .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.5vw,32px)}
+    @media(max-width:800px){.card-grid{grid-template-columns:1fr}}
+    .creator-card{display:block;border:1px solid var(--ink-line);background:var(--page);transition:transform 400ms cubic-bezier(0.2,0,0,1),box-shadow 400ms ease}
+    .creator-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+    .card-visual{aspect-ratio:5/4;position:relative;overflow:hidden;background:var(--charcoal)}
+    .card-visual img{width:100%;height:100%;object-fit:cover;transition:transform 800ms cubic-bezier(0.2,0,0,1);filter:brightness(0.82)}
+    .creator-card:hover .card-visual img{transform:scale(1.06);filter:brightness(0.92)}
+    .card-visual .card-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(26,26,24,0.9) 0%,rgba(26,26,24,0.15) 45%,rgba(26,26,24,0) 68%);display:flex;align-items:flex-end;padding:28px 24px}
+    .card-overlay h3{font-family:var(--serif);font-size:clamp(26px,3vw,36px);font-weight:400;color:var(--page);line-height:1.05;letter-spacing:-0.01em}
+    .card-body{padding:28px 24px 32px}
+    .card-body .card-tagline{font-size:14px;color:var(--slate);line-height:1.6;margin-bottom:10px;font-weight:300}
+    .card-body .card-meta{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ash);font-weight:500}
+
+    .modules-list{counter-reset:mod;list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--ink-line)}
+    @media(max-width:600px){.modules-list{grid-template-columns:1fr}}
+    .modules-list li{counter-increment:mod;padding:28px 32px;border-bottom:1px solid var(--ink-line);border-right:1px solid var(--ink-line);display:flex;gap:16px;align-items:baseline;transition:background 200ms ease}
+    .modules-list li:nth-child(even){border-right:none}
+    .modules-list li:hover{background:rgba(0,0,0,0.012)}
+    .modules-list li::before{content:"0" counter(mod);font-family:var(--serif);font-size:20px;color:var(--stone);flex-shrink:0;font-style:italic}
+    .modules-list li strong{display:block;font-size:14px;font-weight:500;margin-bottom:3px;letter-spacing:-0.01em}
+    .modules-list li span{font-size:12px;color:var(--ash);font-weight:300}
+
+    .footer{padding:40px clamp(20px,5vw,64px);border-top:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ash);max-width:1120px;margin:0 auto;font-weight:300}
+    .footer-brand{font-family:var(--serif);font-size:16px;color:var(--ink);font-style:italic}
+
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity 800ms cubic-bezier(0.2,0,0,1),transform 800ms cubic-bezier(0.2,0,0,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="brand"><em>Creator OS</em>创造者生命说明书</a>
+  <div class="nav-links">
+    <a href="jonathan-ive.html">Jony Ive</a>
+    <a href="steve-jobs.html">Steve Jobs</a>
+    <a href="zaha-hadid.html">Zaha Hadid</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-kicker">Creator OS &middot; Research Archive</p>
+    <h1>我们不只研究<br>伟大的作品<i>我们研究作品如何<br>从生命里长出来</i></h1>
+    <p class="hero-thesis">每一个改变世界的作品，背后都有一套独特的生命操作系统。从人类图、生命故事、时代背景与关键作品出发，看见天赋如何被使用，作品如何被创造。</p>
+  </div>
+</section>
+
+<section class="section reveal">
+  <p class="section-label">Why This Exists</p>
+  <h2>我们不研究作品本身<br>我们研究作品背后的&lsquo;人&rsquo;</h2>
+  <p class="section-lead">传统的人物百科告诉你「他是谁、做过什么」。这里追问的是：「他为什么会成为他？」每一个伟大的作品都不是孤立的灵感，而是一个人的天赋、性格、能量结构、时代背景、关键选择、关系匹配和生命经历共同作用的结果。</p>
+  <div class="philosophy-grid">
+    <div class="phil-item"><p class="phil-num">01</p><h4>看见天赋如何运转</h4><p>通过人类图视角理解创造者的能量类型、决策方式与天赋通道——不是算命，而是一种观察工具。</p></div>
+    <div class="phil-item"><p class="phil-num">02</p><h4>理解关系如何共振</h4><p>拆解创造者与关键伙伴之间的能量互补：为什么某些组合能产生超出预期的化学反应。</p></div>
+    <div class="phil-item"><p class="phil-num">03</p><h4>发现你可以怎样使用自己</h4><p>不是膜拜大师，而是通过研究顶尖创造者的生命操作系统，找到属于你自己的创造方式。</p></div>
+  </div>
+</section>
+
+<section class="section-alt reveal">
+  <div class="section-inner">
+    <p class="section-label">Explore</p>
+    <h2>首批创造者研究</h2>
+    <p class="section-lead" style="color:var(--slate)">从三位定义各自领域的创造者开始，每份研究包含完整的七模块生命操作系统分析。</p>
+    <div class="card-grid">
+      <a href="jonathan-ive.html" class="creator-card">
+        <div class="card-visual"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Jonathan%20Ive%20at%20Macworld%202009.jpg?width=800" alt="Jonathan Ive" loading="lazy"><div class="card-overlay"><h3>Jonathan<br>Ive</h3></div></div>
+        <div class="card-body"><p class="card-tagline">把冰冷科技变成日常情感体验的苹果灵魂设计师。</p><p class="card-meta">设计 &middot; 苹果 &middot; AI硬件时代</p></div>
+      </a>
+      <a href="steve-jobs.html" class="creator-card">
+        <div class="card-visual"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Steve%20Jobs%20Headshot%202010.jpg?width=800" alt="Steve Jobs" loading="lazy"><div class="card-overlay"><h3>Steve<br>Jobs</h3></div></div>
+        <div class="card-body"><p class="card-tagline">用现实扭曲力场把未来拉进现在的极致产品哲学家。</p><p class="card-meta">愿景 &middot; 产品 &middot; 现实扭曲力场</p></div>
+      </a>
+      <a href="zaha-hadid.html" class="creator-card">
+        <div class="card-visual"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Heydar%20Aliyev%20Center%201.1.jpg?width=800" alt="Zaha Hadid" loading="lazy"><div class="card-overlay"><h3>Zaha<br>Hadid</h3></div></div>
+        <div class="card-body"><p class="card-tagline">用曲线打破直线、在男性主导的建筑世界撕开裂缝的女性创造者。</p><p class="card-meta">建筑 &middot; 曲线 &middot; 女性突破</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal">
+  <p class="section-label">Framework</p>
+  <h2>七模块研究框架</h2>
+  <p class="section-lead">每个创造者都从这七个维度被完整拆解，形成一份「创造者生命说明书」。</p>
+  <ul class="modules-list">
+    <li><strong>他是谁</strong><span>一句话定位，直击本质</span></li>
+    <li><strong>他所处的时代</strong><span>不是孤立看人，而是看人与时代的共振</span></li>
+    <li><strong>生命故事</strong><span>成长、转折、低谷、关键选择</span></li>
+    <li><strong>人类图视角</strong><span>能量类型、决策方式、天赋通道</span></li>
+    <li><strong>关键关系</strong><span>人与人的能量匹配与互补</span></li>
+    <li><strong>代表作品</strong><span>作品如何从生命中诞生</span></li>
+    <li><strong>给今天创作者的启发</strong><span>从大师的生命操作系统里学到什么</span></li>
+  </ul>
+</section>
+
+<footer class="footer">
+  <span class="footer-brand">Creator OS</span>
+  <span>创造者生命说明书 &middot; AI时代创造者研究档案馆</span>
+</footer>
+
+<script>
+(function(){
+var nav=document.getElementById("siteNav");
+window.addEventListener("scroll",function(){nav.classList.toggle("scrolled",window.scrollY>60)});
+document.querySelectorAll(".reveal").forEach(function(el){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add("visible")})},{threshold:0.08}).observe(el)});
+var c=document.getElementById("hero-canvas"),x=c.getContext("2d"),f=0,p={x:0.5,y:0.3};
+window.addEventListener("pointermove",function(e){p={x:e.clientX/innerWidth,y:e.clientY/innerHeight}});
+function rz(){var d=devicePixelRatio||1;c.width=c.clientWidth*d;c.height=c.clientHeight*d;x.setTransform(d,0,0,d,0,0)}
+function dr(){
+var w=c.clientWidth,h=c.clientHeight;x.clearRect(0,0,w,h);f+=0.005;
+for(var i=0;i<44;i++){
+var y=(i/43)*h,wv=Math.sin(i*0.3+f)*18;x.beginPath();x.moveTo(-80,y+wv);
+for(var vx=-80;vx<=w+80;vx+=40){var t=vx/w,pl=(p.x-0.5)*40;x.lineTo(vx,y+Math.sin(t*4.5+f+i*0.16)*(8+16*(1-Math.abs(t-0.5)))+pl*Math.sin(t*Math.PI))}
+x.strokeStyle=i%7===0?"rgba(122,154,142,0.26)":i%4===0?"rgba(250,250,247,0.05)":"rgba(250,250,247,0.025)";
+x.lineWidth=i%7===0?0.8:0.4;x.stroke()
+}requestAnimationFrame(dr)}
+window.addEventListener("resize",rz);rz();dr()
+})();
+</script>
+</body>
+</html>

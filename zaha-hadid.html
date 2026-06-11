@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zaha Hadid · 创造者生命说明书 | Creator OS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --ink: #1a1a18; --warm-black: #1f1f1c; --charcoal: #2d2d2a;
+      --page: #fafaf7; --warm-page: #f4f2ed; --cream: #ede8df;
+      --stone: #d5d0c8; --ash: #8a857c; --slate: #6b6660; --dust: #a8a39b;
+      --oxide: #c44e3a; --gold: #b8943e; --sage: #7a9a8e; --cyan: #6db3a6;
+      --ink-line: rgba(26, 26, 24, 0.07);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 40px rgba(0,0,0,0.05);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,0.07);
+      --serif: "EB Garamond", "Times New Roman", "Songti SC", "Noto Serif SC", serif;
+      --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--sans);background:var(--page);color:var(--ink);line-height:1.75;font-size:15px;font-weight:400;overflow-x:hidden}
+    a{color:inherit}
+    button,a,input{font:inherit;cursor:pointer}
+
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(20px,4vw,48px);transition:background 400ms ease,box-shadow 400ms ease,color 400ms ease;color:var(--page);mix-blend-mode:difference}
+    .site-nav.scrolled{background:rgba(250,250,247,0.86);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--ink-line);color:var(--ink);mix-blend-mode:normal}
+    .site-nav.scrolled .nav-links a{color:var(--ink)}
+    .site-nav.scrolled .nav-links{border-color:var(--ink-line);background:transparent}
+    .brand{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:inherit;text-decoration:none}
+    .brand em{display:block;font-family:var(--serif);font-size:20px;font-style:italic;letter-spacing:0;text-transform:none;font-weight:400;margin-top:1px}
+    .nav-links{display:flex;gap:1px;padding:4px;border:1px solid rgba(250,250,247,0.14);background:rgba(31,31,28,0.3);backdrop-filter:blur(12px);transition:border-color 400ms ease,background 400ms ease}
+    .nav-links a{display:inline-flex;align-items:center;min-height:30px;padding:0 14px;font-size:12px;font-weight:400;color:rgba(250,250,247,0.6);text-decoration:none;transition:color 200ms ease,background 200ms ease;letter-spacing:0.02em}
+    .nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--page)}
+
+    .hero{min-height:90svh;display:flex;flex-direction:column;justify-content:flex-end;padding:100px clamp(20px,5vw,64px) 72px;background:var(--warm-black);position:relative;isolation:isolate;overflow:hidden}
+    #hero-canvas{position:absolute;inset:0;z-index:1;opacity:0.55}
+    .hero-content{position:relative;z-index:2;max-width:920px}
+    .hero-kicker{letter-spacing:0.22em;text-transform:uppercase;font-size:11px;font-weight:500;margin-bottom:24px}
+    .hero h1{font-family:var(--serif);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:0.94;color:var(--page);letter-spacing:-0.01em;margin:0}
+    .hero-tagline{max-width:600px;font-size:clamp(18px,2.2vw,26px);line-height:1.45;margin-top:28px;font-family:var(--serif);font-weight:400;font-style:italic}
+
+    .section{padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);max-width:920px;margin:0 auto}
+    .section-dark{background:var(--warm-black);padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);max-width:none}
+    .section-dark>.section-inner{max-width:920px;margin:0 auto}
+    .section-dark,.section-dark p{color:rgba(250,250,247,0.82)}
+    .section-dark h2,.section-dark h3,.section-dark h4{color:var(--page)}
+    .section-dark .module-label{color:var(--dust)}
+
+    .module-label{letter-spacing:0.2em;text-transform:uppercase;font-size:10px;font-weight:500;color:var(--ash);margin-bottom:12px}
+    .section h2{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;line-height:1.15;margin-bottom:32px;letter-spacing:-0.01em}
+    .section p{font-size:16px;margin-bottom:16px}
+
+    .insight-box{border-left:2px solid var(--oxide);padding:20px 24px;margin:36px 0;background:rgba(196,78,58,0.05);font-size:16px;line-height:1.7}
+    .section-dark .insight-box{background:rgba(196,78,58,0.08);border-color:var(--sage)}
+    .insight-box strong{display:block;margin-bottom:6px;font-family:var(--serif);font-size:18px;font-weight:400}
+
+    .hd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:32px 0}
+    @media(max-width:640px){.hd-grid{grid-template-columns:1fr}}
+    .hd-card{padding:24px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .hd-card:hover{border-color:var(--stone)}
+    .section-dark .hd-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+    .section-dark .hd-card:hover{border-color:rgba(255,255,255,0.16)}
+    .hd-card h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:8px}
+    .hd-card p{font-size:14px;color:var(--slate);margin:0;line-height:1.6}
+    .section-dark .hd-card p{color:var(--dust)}
+
+    .rel-diagram{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap;padding:48px 0;margin:32px 0}
+    .rel-node{padding:32px 36px;text-align:center;border:1px solid var(--ink-line);background:var(--page);min-width:180px;transition:border-color 300ms ease}
+    .rel-node:hover{border-color:var(--stone)}
+    .rel-node h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px}
+    .rel-node p{font-size:13px;color:var(--slate);margin:0}
+    .rel-arrow{font-family:var(--serif);font-size:28px;color:var(--oxide);display:flex;align-items:center;gap:10px}
+    .rel-arrow span{font-size:12px;color:var(--ash);max-width:200px;line-height:1.45;font-family:var(--sans)}
+
+    .work-item{display:grid;grid-template-columns:260px 1fr;gap:32px;padding:40px 0;border-bottom:1px solid var(--ink-line);align-items:start}
+    .section-dark .work-item{border-color:rgba(255,255,255,0.08)}
+    @media(max-width:680px){.work-item{grid-template-columns:1fr}}
+    .work-item img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .work-item h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px}
+    .work-item .work-meta{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ash);margin-bottom:12px;font-weight:500}
+    .work-item p{font-size:14px;color:var(--slate);line-height:1.7}
+
+    .takeaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:760px){.takeaway-grid{grid-template-columns:1fr}}
+    .takeaway-card{padding:28px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .takeaway-card:hover{border-color:var(--stone)}
+    .takeaway-card .take-num{font-family:var(--serif);font-size:40px;color:var(--cream);line-height:0.9;margin-bottom:14px;font-style:italic}
+    .takeaway-card h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:8px;letter-spacing:-0.01em}
+    .takeaway-card p{font-size:14px;color:var(--slate);margin:0;line-height:1.65}
+
+    .toc{display:flex;flex-wrap:wrap;gap:6px;margin:36px 0;padding:0;list-style:none}
+    .toc a{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;font-size:12px;font-weight:400;border:1px solid var(--ink-line);text-decoration:none;transition:background 200ms ease,color 200ms ease;letter-spacing:0.02em}
+    .toc a:hover{background:var(--ink);color:var(--page);border-color:var(--ink)}
+
+    .footer{padding:40px clamp(20px,5vw,64px);border-top:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ash);max-width:920px;margin:0 auto;font-weight:300}
+    .footer-brand{font-family:var(--serif);font-size:16px;color:var(--ink);font-style:italic}
+
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity 800ms cubic-bezier(0.2,0,0,1),transform 800ms cubic-bezier(0.2,0,0,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="brand"><em>Creator OS</em>创造者生命说明书</a>
+  <div class="nav-links">
+    <a href="jonathan-ive.html">Jonathan Ive</a>
+    <a href="steve-jobs.html">Steve Jobs</a>
+    <a href="zaha-hadid.html" class="active">Zaha Hadid</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-kicker" style="color:var(--oxide)">创造者生命说明书 · 03</p>
+    <h1>Zaha<br>Hadid</h1>
+    <p class="hero-tagline">用曲线打破直线、在男性主导的建筑世界撕开裂缝的女性创造者。</p>
+  </div>
+</section>
+
+<section class="section">
+  <ul class="toc">
+    <li><a href="#who">01 他是谁</a></li>
+    <li><a href="#era">02 时代背景</a></li>
+    <li><a href="#story">03 生命故事</a></li>
+    <li><a href="#hd">04 人类图视角</a></li>
+    <li><a href="#relations">05 关键关系</a></li>
+    <li><a href="#works">06 代表作品</a></li>
+    <li><a href="#takeaway">07 创作者的启发</a></li>
+  </ul>
+</section>
+
+<section class="section reveal" id="who">
+  <p class="module-label">Module 01 · 他是谁</p>
+  <h2>让建筑摆脱重力的曲线女王，第一位获得普利兹克奖的女性建筑师</h2>
+  <p>Zaha Hadid，伊拉克裔英国建筑师，2004年成为首位获得建筑界最高荣誉普利兹克奖的女性。她用参数化设计和流体力学的语言，把建筑从「方盒子」中解放出来——曲线、流动、碎片化、失重感是她作品的标志。她证明了一件事：女性不仅可以在男性主导的领域生存，还可以彻底改变它的语言。</p>
+  <div class="insight-box">
+    <strong>核心特质</strong>
+    不被定义、不妥协、不解释。在一个「女性建筑师」被当作异类的时代，她选择用作品说话——用数学、物理和结构工程来证明曲线的合理性。她的建筑不是装饰，是经过精密计算的流体形态。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="era">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 02 · 他所处的时代</p>
+    <h2>从男性俱乐部到参数化革命，她改变了建筑的语言</h2>
+    <p>Hadid 的时代背景是建筑界的双重变革：1970-80年代，她在一个几乎是「男性俱乐部」的行业中起步。她的导师 Rem Koolhaas 形容她为「一个在纸面上拥有巨大天赋的星球」。但到了1990-2000年代，计算机技术让参数化设计成为可能——曲线不再是手工绘制的幻想，而是可以被精确计算、施工的现实。</p>
+    <p>她的职业生涯轨迹完美对齐了这场技术革命：早期（1980-1990年代）她的曲线建筑只能存在于图纸上，被称为「纸上建筑师」；晚期（2000-2016年）技术赶上了她的想象，她的建筑在全球各地拔地而起。她等了20年，等到了属于她的时代。</p>
+  </div>
+</section>
+
+<section class="section reveal" id="story">
+  <p class="module-label">Module 03 · 生命故事</p>
+  <h2>从巴格达到伦敦，一个异乡人如何重新定义了「家」</h2>
+  <p>1950年生于巴格达一个开明的知识家庭，父亲是政经学者和实业家，母亲是艺术家。1972年独自离开伊拉克前往伦敦求学，进入建筑联盟学院（AA）。这一出走不仅仅是地理上的——巴格达从此成为她回不去的故乡。</p>
+  <p>她在 AA 师从 Rem Koolhaas 和 Elia Zenghelis，1979年成立自己的工作室 Zaha Hadid Architects。但此后的十几年，她的设计几乎没有被建成。甲方说她的建筑「无法建造」「太过激进」「不像建筑」。但她拒绝妥协——拒绝把曲线改成直线，拒绝把自己变成一个「正常的建筑师」。</p>
+  <p>转机在 1993 年到来——德国 Vitra 消防站成为她第一座建成的作品。此后她的建筑在全球各地落地：广州歌剧院、伦敦水上运动中心、北京大兴机场、阿利耶夫文化中心……2016年因心脏病突发去世，享年65岁。她的遗产仍在被建造。</p>
+  <div class="insight-box">
+    <strong>生命母题</strong>
+    异乡人、边界打破者、「不属于任何地方」但重新定义了空间本身。她一生都在与「归属」这个概念搏斗——作为一个伊拉克女性在英国、作为一个女性在建筑界、作为一个曲线的信徒在直线的世界。她从未试图融入任何地方，而是选择重新定义空间本身的规则。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="hd">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 04 · 人类图视角</p>
+    <h2>理解 Zaha Hadid 的底层能量结构</h2>
+    <p style="color:var(--mist)">
+      人类图不是用来给一个人下定义，而是作为一种理解创造者能量模式的观察工具。以下分析基于公开出生数据（1950年10月31日，巴格达）的推测性解读。
+    </p>
+
+    <div class="hd-grid">
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>类型：Manifestor（显示者）</h4>
+        <p>不等待、不征求意见、直接发起行动。Hadid 19岁独自前往伦敦，在「纸上建筑师」阶段坚持了十几年没有建成作品也不妥协——这是典型的 Manifestor 能量：不为环境所动，持续推动自己的愿景。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>创造力模式：感知型 × 爆发型</h4>
+        <p>对空间、形态、运动有超常的感知力——她能看到「空间在流动」。结合爆发式的创作能量，她能在极短时间内完成极具冲击力的设计。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>核心天赋：空间感知与边界突破</h4>
+        <p>对空间的理解超越传统几何学——她将俄罗斯构成主义、流体力学和参数化计算融合成全新的建筑语言。这种跨越学科边界的能力极为罕见。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>能量特征：独立且不被定义</h4>
+        <p>她的一生都在对抗「定义」——不被「女性建筑师」定义，不被「伊拉克人」定义，不被「建筑应该是什么样的」定义。这种不被定义的冲动是她创作能量的核心来源。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="relations">
+  <p class="module-label">Module 05 · 关键关系</p>
+  <h2>导师、合伙人、时代的三角关系</h2>
+
+  <div class="rel-diagram">
+    <div class="rel-node">
+      <h4>Rem Koolhaas</h4>
+      <p>导师 · 启蒙者<br>AA 时代的引路人<br>教会她「建筑即宣言」</p>
+    </div>
+    <div class="rel-arrow">
+      ⟶
+      <span>传承与超越：<br>从学生的构成主义<br>到超越导师的<br>参数化流体建筑</span>
+    </div>
+    <div class="rel-node">
+      <h4>Zaha Hadid</h4>
+      <p>不被定义<br>独立宣言</p>
+    </div>
+  </div>
+
+  <p>Hadid 最重要的关系是她与导师 Rem Koolhaas 的关系。Koolhaas 是第一个认识到她天才的人——他说：「她是一个在纸面上拥有巨大天赋的星球。」他教给她「建筑即宣言」的信念——建筑不只是功能，而是对世界的立场。但 Hadid 后来超越了导师。</p>
+  <p>另一个关键关系是与 Patrik Schumacher 的合作。Schumacher 是 ZHA 的合伙人，将 Hadid 的视觉语言转化为可建造的参数化系统。如果说 Hadid 是「建筑诗人」，Schumacher 就是「建筑工程师」——他让她的诗歌变得可建造。</p>
+</section>
+
+<section class="section-dark reveal" id="works">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 06 · 代表作品如何诞生</p>
+    <h2>从「无法建造」到「必须建造」</h2>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Heydar%20Aliyev%20Center%201.1.jpg?width=600" alt="Heydar Aliyev Center" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">阿利耶夫文化中心（2012）</h4>
+        <p class="work-meta">诞生背景：参数化成熟期 · Hadid 风格的巅峰</p>
+        <p>位于巴库的这座建筑是 Hadid 流体建筑哲学的巅峰——没有一根直线，地面、墙面、屋顶无缝过渡。它象征着 Hadid 对「边界」的终极回应：在建筑中消除边界，就像她的人生一样。</p>
+      </div>
+    </div>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Guangzhou%20Opera%20House%20Night.jpg?width=600" alt="Guangzhou Opera House" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">广州歌剧院（2010）</h4>
+        <p class="work-meta">诞生背景：中国城市化浪潮 · Hadid 进入亚洲</p>
+        <p>两颗「卵石」坐落在珠江边上——广州歌剧院是 Hadid 在中国落地的第一个大型作品。它打破了「歌剧院必须是方盒子」的惯性，用有机形态重新定义了文化建筑与城市的关系。</p>
+      </div>
+    </div>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/MAXXI_interior.jpg?width=600" alt="MAXXI" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">MAXXI 博物馆（2010）</h4>
+        <p class="work-meta">诞生背景：获普利兹克奖后 · 建筑语言的成熟</p>
+        <p>罗马的 MAXXI 是 Hadid 最具「流动感」的作品之一。黑色楼梯、蜿蜒墙体、光线切割——它不是在展示艺术，它自己就是一件艺术品。这个作品获得了斯特林奖，巩固了她作为「无法被忽视的建筑师」的地位。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="takeaway">
+  <p class="module-label">Module 07 · 给今天创作者的启发</p>
+  <h2>从 Hadid 的生命操作系统里，我们能学到什么？</h2>
+
+  <div class="takeaway-grid">
+    <div class="takeaway-card"><p class="take-num">01</p><h4>不被定义是你的最大武器</h4><p>Hadid 一生都在对抗定义。当世界试图把她放进「女性建筑师」的盒子里时，她用作品证明她不是「女性建筑师」——她就是「建筑师」，不加任何限定词。不被定义不是反叛姿态，是创作自由的必要条件。</p></div>
+    <div class="takeaway-card"><p class="take-num">02</p><h4>坚持二十年，等时代追上你</h4><p>Hadid 等了将近20年才等到她的第一座建筑建成。她没有在等待中妥协自己的语言，而是一直在精进——当技术终于匹配她的想象时，她的作品已经在纸面上演练了无数次。</p></div>
+    <div class="takeaway-card"><p class="take-num">03</p><h4>异乡人视角是创造力的源头</h4><p>作为一个在英国的伊拉克女性，Hadid 永远处于「之间」——在文化之间、在语言之间、在归属之间。这种「不属于任何地方」的状态给了她重新定义空间的自由。</p></div>
+    <div class="takeaway-card"><p class="take-num">04</p><h4>数学不是限制，是解放</h4><p>Hadid 的曲线不是感性的随意涂抹，而是经过精密计算的参数化形态。她用数学证明了：曲线不仅美，而且可以建造、可以承重、可以实现。这对任何「被认为不可能」的创作者都是启发。</p></div>
+    <div class="takeaway-card"><p class="take-num">05</p><h4>你的身份是你的优势，不是劣势</h4><p>Hadid 的女性身份、伊拉克出身、移民经历——在传统建筑界都是「劣势」。但她从这些身份中汲取了独特的视角：正因为她不属于主流，她才能看到主流看不到的空间可能性。</p></div>
+    <div class="takeaway-card"><p class="take-num">06</p><h4>建筑是对世界的宣言</h4><p>Hadid 继承了导师 Koolhaas 的信条：建筑不是沉默的背景，而是对世界的宣言。每一座建筑都在说「世界还可以是这样的」。作为创作者，你的每一个作品也都在说这句话。</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span class="footer-brand">Creator OS</span>
+  <span>← <a href="index.html">回到首页</a> · 创造者生命说明书 · AI时代创造者研究档案馆</span>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById("siteNav");
+  window.addEventListener("scroll", function() { nav.classList.toggle("scrolled", window.scrollY > 80); });
+  document.querySelectorAll(".reveal").forEach(function(el) {
+    new IntersectionObserver(function(es) { es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.1 }).observe(el);
+  });
+  var canvas = document.getElementById("hero-canvas");
+  var ctx = canvas.getContext("2d");
+  var frame = 0;
+  function resize() { var dpr = window.devicePixelRatio || 1; canvas.width = canvas.clientWidth * dpr; canvas.height = canvas.clientHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function draw() {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h); frame += 0.005;
+    for (var i = 0; i < 36; i++) {
+      var y = (i / 35) * h, wave = Math.sin(i * 0.36 + frame) * 24;
+      ctx.beginPath(); ctx.moveTo(-80, y + wave);
+      for (var x = -80; x <= w + 80; x += 55) {
+        var t = x / w;
+        ctx.lineTo(x, y + Math.sin(t * 5.8 + frame + i * 0.21) * (11 + 22 * (1 - Math.abs(t - 0.5))));
+      }
+      ctx.strokeStyle = i % 5 === 0 ? "rgba(199, 62, 47, 0.26)" : "rgba(243, 245, 242, 0.06)";
+      ctx.lineWidth = i % 5 === 0 ? 0.9 : 0.5;
+      ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener("resize", resize); resize(); draw();
+})();
+</script>
+</body>
+</html>

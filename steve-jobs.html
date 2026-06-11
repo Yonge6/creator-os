@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steve Jobs · 创造者生命说明书 | Creator OS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --ink: #1a1a18; --warm-black: #1f1f1c; --charcoal: #2d2d2a;
+      --page: #fafaf7; --warm-page: #f4f2ed; --cream: #ede8df;
+      --stone: #d5d0c8; --ash: #8a857c; --slate: #6b6660; --dust: #a8a39b;
+      --oxide: #c44e3a; --gold: #b8943e; --sage: #7a9a8e; --cyan: #6db3a6;
+      --ink-line: rgba(26, 26, 24, 0.07);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 40px rgba(0,0,0,0.05);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,0.07);
+      --serif: "EB Garamond", "Times New Roman", "Songti SC", "Noto Serif SC", serif;
+      --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--sans);background:var(--page);color:var(--ink);line-height:1.75;font-size:15px;font-weight:400;overflow-x:hidden}
+    a{color:inherit}
+    button,a,input{font:inherit;cursor:pointer}
+
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(20px,4vw,48px);transition:background 400ms ease,box-shadow 400ms ease,color 400ms ease;color:var(--page);mix-blend-mode:difference}
+    .site-nav.scrolled{background:rgba(250,250,247,0.86);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--ink-line);color:var(--ink);mix-blend-mode:normal}
+    .site-nav.scrolled .nav-links a{color:var(--ink)}
+    .site-nav.scrolled .nav-links{border-color:var(--ink-line);background:transparent}
+    .brand{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:inherit;text-decoration:none}
+    .brand em{display:block;font-family:var(--serif);font-size:20px;font-style:italic;letter-spacing:0;text-transform:none;font-weight:400;margin-top:1px}
+    .nav-links{display:flex;gap:1px;padding:4px;border:1px solid rgba(250,250,247,0.14);background:rgba(31,31,28,0.3);backdrop-filter:blur(12px);transition:border-color 400ms ease,background 400ms ease}
+    .nav-links a{display:inline-flex;align-items:center;min-height:30px;padding:0 14px;font-size:12px;font-weight:400;color:rgba(250,250,247,0.6);text-decoration:none;transition:color 200ms ease,background 200ms ease;letter-spacing:0.02em}
+    .nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--page)}
+
+    .hero{min-height:90svh;display:flex;flex-direction:column;justify-content:flex-end;padding:100px clamp(20px,5vw,64px) 72px;background:var(--warm-black);position:relative;isolation:isolate;overflow:hidden}
+    #hero-canvas{position:absolute;inset:0;z-index:1;opacity:0.55}
+    .hero-content{position:relative;z-index:2;max-width:920px}
+    .hero-kicker{letter-spacing:0.22em;text-transform:uppercase;font-size:11px;font-weight:500;margin-bottom:24px}
+    .hero h1{font-family:var(--serif);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:0.94;color:var(--page);letter-spacing:-0.01em;margin:0}
+    .hero-tagline{max-width:600px;font-size:clamp(18px,2.2vw,26px);line-height:1.45;margin-top:28px;font-family:var(--serif);font-weight:400;font-style:italic}
+
+    .section{padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);max-width:920px;margin:0 auto}
+    .section-dark{background:var(--warm-black);padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);max-width:none}
+    .section-dark>.section-inner{max-width:920px;margin:0 auto}
+    .section-dark,.section-dark p{color:rgba(250,250,247,0.82)}
+    .section-dark h2,.section-dark h3,.section-dark h4{color:var(--page)}
+    .section-dark .module-label{color:var(--dust)}
+
+    .module-label{letter-spacing:0.2em;text-transform:uppercase;font-size:10px;font-weight:500;color:var(--ash);margin-bottom:12px}
+    .section h2{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;line-height:1.15;margin-bottom:32px;letter-spacing:-0.01em}
+    .section p{font-size:16px;margin-bottom:16px}
+
+    .insight-box{border-left:2px solid var(--gold);padding:20px 24px;margin:36px 0;background:rgba(184,148,62,0.06);font-size:16px;line-height:1.7}
+    .section-dark .insight-box{background:rgba(184,148,62,0.08);border-color:var(--sage)}
+    .insight-box strong{display:block;margin-bottom:6px;font-family:var(--serif);font-size:18px;font-weight:400}
+
+    .hd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:32px 0}
+    @media(max-width:640px){.hd-grid{grid-template-columns:1fr}}
+    .hd-card{padding:24px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .hd-card:hover{border-color:var(--stone)}
+    .section-dark .hd-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+    .section-dark .hd-card:hover{border-color:rgba(255,255,255,0.16)}
+    .hd-card h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:8px}
+    .hd-card p{font-size:14px;color:var(--slate);margin:0;line-height:1.6}
+    .section-dark .hd-card p{color:var(--dust)}
+
+    .rel-diagram{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap;padding:48px 0;margin:32px 0}
+    .rel-node{padding:32px 36px;text-align:center;border:1px solid var(--ink-line);background:var(--page);min-width:180px;transition:border-color 300ms ease}
+    .rel-node:hover{border-color:var(--stone)}
+    .rel-node h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px}
+    .rel-node p{font-size:13px;color:var(--slate);margin:0}
+    .rel-arrow{font-family:var(--serif);font-size:28px;color:var(--gold);display:flex;align-items:center;gap:10px}
+    .rel-arrow span{font-size:12px;color:var(--ash);max-width:200px;line-height:1.45;font-family:var(--sans)}
+
+    .work-item{display:grid;grid-template-columns:260px 1fr;gap:32px;padding:40px 0;border-bottom:1px solid var(--ink-line);align-items:start}
+    .section-dark .work-item{border-color:rgba(255,255,255,0.08)}
+    @media(max-width:680px){.work-item{grid-template-columns:1fr}}
+    .work-item img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .work-item h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px}
+    .work-item .work-meta{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ash);margin-bottom:12px;font-weight:500}
+    .work-item p{font-size:14px;color:var(--slate);line-height:1.7}
+
+    .takeaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:760px){.takeaway-grid{grid-template-columns:1fr}}
+    .takeaway-card{padding:28px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .takeaway-card:hover{border-color:var(--stone)}
+    .takeaway-card .take-num{font-family:var(--serif);font-size:40px;color:var(--cream);line-height:0.9;margin-bottom:14px;font-style:italic}
+    .takeaway-card h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:8px;letter-spacing:-0.01em}
+    .takeaway-card p{font-size:14px;color:var(--slate);margin:0;line-height:1.65}
+
+    .toc{display:flex;flex-wrap:wrap;gap:6px;margin:36px 0;padding:0;list-style:none}
+    .toc a{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;font-size:12px;font-weight:400;border:1px solid var(--ink-line);text-decoration:none;transition:background 200ms ease,color 200ms ease;letter-spacing:0.02em}
+    .toc a:hover{background:var(--ink);color:var(--page);border-color:var(--ink)}
+
+    .footer{padding:40px clamp(20px,5vw,64px);border-top:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ash);max-width:920px;margin:0 auto;font-weight:300}
+    .footer-brand{font-family:var(--serif);font-size:16px;color:var(--ink);font-style:italic}
+
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity 800ms cubic-bezier(0.2,0,0,1),transform 800ms cubic-bezier(0.2,0,0,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="brand"><em>Creator OS</em>创造者生命说明书</a>
+  <div class="nav-links">
+    <a href="jonathan-ive.html">Jonathan Ive</a>
+    <a href="steve-jobs.html" class="active">Steve Jobs</a>
+    <a href="zaha-hadid.html">Zaha Hadid</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-kicker" style="color:var(--gold)">创造者生命说明书 · 02</p>
+    <h1>Steve<br>Jobs</h1>
+    <p class="hero-tagline">用现实扭曲力场把未来拉进现在的极致产品哲学家。</p>
+  </div>
+</section>
+
+<section class="section">
+  <ul class="toc">
+    <li><a href="#who">01 他是谁</a></li>
+    <li><a href="#era">02 时代背景</a></li>
+    <li><a href="#story">03 生命故事</a></li>
+    <li><a href="#hd">04 人类图视角</a></li>
+    <li><a href="#relations">05 关键关系</a></li>
+    <li><a href="#works">06 代表作品</a></li>
+    <li><a href="#takeaway">07 创作者的启发</a></li>
+  </ul>
+</section>
+
+<section class="section reveal" id="who">
+  <p class="module-label">Module 01 · 他是谁</p>
+  <h2>站在科技与人文交叉路口的极端产品主义者</h2>
+  <p>Steve Jobs，苹果公司联合创始人，先后将个人电脑、动画电影、音乐、手机和平板电脑带入全新的时代。他不写代码，不会工程，但拥有一种罕见的「产品直觉」——能在用户知道自己想要什么之前，就知道他们想要什么。这种能力被同事称为「现实扭曲力场」。</p>
+  <div class="insight-box">
+    <strong>核心特质</strong>
+    极致的产品偏执、二元思维（不是天才就是垃圾）、对「简洁」的宗教般追求、东方禅宗精神与硅谷科技愿景的结合、令人窒息的审美控制力。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="era">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 02 · 他所处的时代</p>
+    <h2>从个人计算机革命到移动互联网时代，他两次定义了未来</h2>
+    <p>乔布斯经历了硅谷最动荡、最辉煌的年代。1970年代个人计算机从车库走向世界，他站在了潮头。1984 年 Macintosh 改变了人机交互的范式。1990 年代被迫离开苹果，收购 Pixar，在数字动画领域创造了另一场革命。2000 年代回归苹果，用 iPod、iPhone、iPad 三件产品完整定义了移动互联网时代的硬件形态。</p>
+    <p>他的时代角色不是「适应者」，而是「召唤者」——他把还不存在的未来拉进当下，然后迫使世界跟上他的速度。</p>
+  </div>
+</section>
+
+<section class="section reveal" id="story">
+  <p class="module-label">Module 03 · 生命故事</p>
+  <h2>被遗弃、被驱逐、重返、封神——一段极端的生命弧线</h2>
+  <p>1955 年出生于旧金山，出生即被遗弃，由 Paul 和 Clara Jobs 收养。1976 年在自家车库与 Steve Wozniak 创立苹果。1985 年，在公司内部权力斗争中被自己亲手创办的公司驱逐。这是他人生的第一个「死亡与重生」循环。</p>
+  <p>离开苹果后，他创办 NeXT 并收购 Pixar。NeXT 在商业上失败，但技术成为 Mac OS X 的基石。Pixar 彻底改变了动画电影——《玩具总动员》开始了一系列改变电影史的作品。1997 年苹果收购 NeXT，乔布斯回归。他在斯坦福演讲中说：「我被苹果开除是我这辈子遇到的最好的事情。」</p>
+  <div class="insight-box">
+    <strong>生命母题</strong>
+    被遗弃与归属感、极致的控制欲与对「简洁」的信仰、东方精神性与西方科技理性之间的张力、「在宇宙中留下印记」的驱动力、以及将死亡作为创造终极动力的「记住你即将死去」。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="hd">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 04 · 人类图视角</p>
+    <h2>理解 Steve Jobs 的底层能量结构</h2>
+    <p style="color:var(--mist)">
+      人类图不是用来给一个人下定义，而是作为一种理解创造者能量模式的观察工具。以下分析基于公开出生数据（1955年2月24日，旧金山）的推测性解读。
+    </p>
+
+    <div class="hd-grid">
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>类型：Manifestor（显示者）</h4>
+        <p>少数人类型，天生的「发起者」——不等待、不回应，直接行动。乔布斯的「现实扭曲力场」本质上是 Manifestor 的典型特征：他不需要征求许可，他直接让事情发生。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>创造力模式：爆发型</h4>
+        <p>不是在稳定输出中积累，而是在压力、紧迫感和「时间有限」的认知下爆发出巨大的能量。「记住你即将死去是我知道的避免陷入得失陷阱的最好方法。」</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>核心天赋：直觉与审美</h4>
+        <p>对产品体验有近乎超自然的直觉——他能够在第一眼看到原型时就知道它「不对」或「对了」。这种直觉不是分析性的，而是身体性的、即时的、不可辩驳的。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>能量特征：Will（意志力中心）驱动</h4>
+        <p>强大的意志力动力，对「伟大」和「改变世界」有执念。同时伴随「证明自己」的内在压力——这与被遗弃的早年经历形成深层共振。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="relations">
+  <p class="module-label">Module 05 · 关键关系</p>
+  <h2>Wozniak、Ive、被驱逐——每个人定义了他的一部分</h2>
+
+  <div class="rel-diagram">
+    <div class="rel-node">
+      <h4>Steve Wozniak</h4>
+      <p>工程天才 · 技术实现<br>Apple II 的灵魂</p>
+    </div>
+    <div class="rel-arrow">
+      ⟷
+      <span>互补但分离：<br>Woz 负责「能不能做」<br>Jobs 负责「值不值得做」</span>
+    </div>
+    <div class="rel-node">
+      <h4>Steve Jobs</h4>
+      <p>愿景发动机<br>现实扭曲力场</p>
+    </div>
+  </div>
+
+  <p>乔布斯的核心关系：Wozniak 代表纯粹的技术天才——没有他，Apple II 不可能存在。但两人的关系充满张力：Wozniak 对技术本身的热爱 vs 乔布斯对产品的执念。而 John Sculley——乔布斯亲手挑选、最终驱逐了他的人——代表了被信任的人背叛的深刻创伤。这段经历成为乔布斯生命叙事中最重要的转折点。</p>
+  <p>所有关系中，最接近「能量共振」的是与 Jonathan Ive。Ive 是唯一一个在审美领域获得他绝对信任的人。他们的关系不是老板和下属，而是两个「形式狂热者」的互相看见与互相成就。</p>
+</section>
+
+<section class="section-dark reveal" id="works">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 06 · 代表作品如何诞生</p>
+    <h2>每一个产品都是一段生命状态的投射</h2>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Macintosh_128k_transparency.png?width=600" alt="Macintosh" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">Macintosh（1984）</h4>
+        <p class="work-meta">诞生背景：年轻的乔布斯 · 反叛 IBM · 改变世界</p>
+        <p>Macintosh 是乔布斯 29 岁时的作品——年轻、叛逆、理想主义。著名广告「1984」将 IBM 塑造成老大哥，苹果是砸碎屏幕的反叛者。Macintosh 商业上不算成功，但它定义了「个人电脑应该是什么样的」。</p>
+      </div>
+    </div>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IPod_family.png?width=600" alt="iPod" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">iPod（2001）</h4>
+        <p class="work-meta">诞生背景：回归后 · 音乐产业变革 · 「把1000首歌放进口袋」</p>
+        <p>iPod 不是第一个 MP3 播放器，但它是第一个「让人觉得必须拥有」的播放器。滚轮触控、白耳机、极简设计——它把数字音乐从极客玩具变成了大众消费品，同时彻底改变了音乐产业。</p>
+      </div>
+    </div>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_1st_Gen.svg?width=600" alt="iPhone" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">iPhone（2007）</h4>
+        <p class="work-meta">诞生背景：病后 · 紧迫感 · 「重新发明手机」</p>
+        <p>当乔布斯走上 Macworld 舞台说「今天我们将重新发明手机」时，没有人相信。但那台只有一个按键的黑色玻璃砖块改变了世界。他知道时间不多了，所以必须留下真正伟大的东西。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="takeaway">
+  <p class="module-label">Module 07 · 给今天创作者的启发</p>
+  <h2>从 Jobs 的生命操作系统里，我们能学到什么？</h2>
+
+  <div class="takeaway-grid">
+    <div class="takeaway-card"><p class="take-num">01</p><h4>极致的产品直觉来自极致的自我认识</h4><p>乔布斯不是靠市场调研知道用户需要什么。他是把自己的审美、直觉和生命体验投射到产品里。真正好的产品不是「做给用户」的，而是「做给自己」然后发现所有人都有同样的需求。</p></div>
+    <div class="takeaway-card"><p class="take-num">02</p><h4>被驱逐可以是最大的礼物</h4><p>被自己创办的公司开除是毁灭性的。但乔布斯后来说那是「最好的事」——它剥去了成功带来的虚假安全感，让他重新以初学者的心态创造。</p></div>
+    <div class="takeaway-card"><p class="take-num">03</p><h4>死亡是最好的创造动力</h4><p>「记住你即将死去是我知道的避免陷入得失陷阱的最好方法。你已经赤身裸体，没有理由不去跟随自己的心。」乔布斯将死亡意识变成了创造力的终极燃料。</p></div>
+    <div class="takeaway-card"><p class="take-num">04</p><h4>不要妥协，尤其是对你最重要的东西</h4><p>乔布斯对产品的偏执让很多人受不了，但正是这种「不妥协」创造了超越时代的产品。「Stay hungry, stay foolish」是他一生的实践。</p></div>
+    <div class="takeaway-card"><p class="take-num">05</p><h4>科技与人文的交叉路口是最肥沃的创造土壤</h4><p>乔布斯反复强调苹果的成功来自「站在科技与人文的交叉路口」。他学习书法、禅宗、包豪斯设计——这些「非科技」的知识最终成为他产品直觉的核心来源。</p></div>
+    <div class="takeaway-card"><p class="take-num">06</p><h4>现实扭曲力场的秘密是：先相信，再让世界跟上</h4><p>乔布斯最著名的「超能力」不是技术天赋，而是先于所有人「看见」未来，然后用自己的能量、偏执和感染力让足够多的人相信那个未来，最终让它变成现实。</p></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span class="footer-brand">Creator OS</span>
+  <span>← <a href="index.html">回到首页</a> · 创造者生命说明书 · AI时代创造者研究档案馆</span>
+</footer>
+
+<script>
+(function() {
+  var nav = document.getElementById("siteNav");
+  window.addEventListener("scroll", function() { nav.classList.toggle("scrolled", window.scrollY > 80); });
+  document.querySelectorAll(".reveal").forEach(function(el) {
+    new IntersectionObserver(function(es) { es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.1 }).observe(el);
+  });
+  var canvas = document.getElementById("hero-canvas");
+  var ctx = canvas.getContext("2d");
+  var frame = 0;
+  function resize() { var dpr = window.devicePixelRatio || 1; canvas.width = canvas.clientWidth * dpr; canvas.height = canvas.clientHeight * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+  function draw() {
+    var w = canvas.clientWidth, h = canvas.clientHeight;
+    ctx.clearRect(0, 0, w, h); frame += 0.007;
+    for (var i = 0; i < 36; i++) {
+      var y = (i / 35) * h, wave = Math.sin(i * 0.34 + frame) * 20;
+      ctx.beginPath(); ctx.moveTo(-80, y + wave);
+      for (var x = -80; x <= w + 80; x += 50) {
+        var t = x / w;
+        ctx.lineTo(x, y + Math.sin(t * 5.5 + frame + i * 0.19) * (10 + 18 * (1 - Math.abs(t - 0.5))));
+      }
+      ctx.strokeStyle = i % 5 === 0 ? "rgba(212, 168, 83, 0.26)" : "rgba(243, 245, 242, 0.06)";
+      ctx.lineWidth = i % 5 === 0 ? 0.9 : 0.5;
+      ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener("resize", resize); resize(); draw();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jonathan Ive · 创造者生命说明书 | Creator OS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --ink: #1a1a18; --warm-black: #1f1f1c; --charcoal: #2d2d2a;
+      --page: #fafaf7; --warm-page: #f4f2ed; --cream: #ede8df;
+      --stone: #d5d0c8; --ash: #8a857c; --slate: #6b6660; --dust: #a8a39b;
+      --oxide: #c44e3a; --gold: #b8943e; --sage: #7a9a8e; --cyan: #6db3a6;
+      --ink-line: rgba(26, 26, 24, 0.07);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.03);
+      --shadow-md: 0 8px 40px rgba(0,0,0,0.05);
+      --shadow-lg: 0 24px 80px rgba(0,0,0,0.07);
+      --serif: "EB Garamond", "Times New Roman", "Songti SC", "Noto Serif SC", serif;
+      --sans: "Inter", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+    body{font-family:var(--sans);background:var(--page);color:var(--ink);line-height:1.75;font-size:15px;font-weight:400;overflow-x:hidden}
+    a{color:inherit}
+    button,a,input{font:inherit;cursor:pointer}
+
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(20px,4vw,48px);transition:background 400ms ease,box-shadow 400ms ease,color 400ms ease;color:var(--page);mix-blend-mode:difference}
+    .site-nav.scrolled{background:rgba(250,250,247,0.86);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--ink-line);color:var(--ink);mix-blend-mode:normal}
+    .site-nav.scrolled .nav-links a{color:var(--ink)}
+    .site-nav.scrolled .nav-links{border-color:var(--ink-line);background:transparent}
+    .brand{font-size:11px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:inherit;text-decoration:none}
+    .brand em{display:block;font-family:var(--serif);font-size:20px;font-style:italic;letter-spacing:0;text-transform:none;font-weight:400;margin-top:1px}
+    .nav-links{display:flex;gap:1px;padding:4px;border:1px solid rgba(250,250,247,0.14);background:rgba(31,31,28,0.3);backdrop-filter:blur(12px);transition:border-color 400ms ease,background 400ms ease}
+    .nav-links a{display:inline-flex;align-items:center;min-height:30px;padding:0 14px;font-size:12px;font-weight:400;color:rgba(250,250,247,0.6);text-decoration:none;transition:color 200ms ease,background 200ms ease;letter-spacing:0.02em}
+    .nav-links a:hover,.nav-links a.active{color:var(--ink);background:var(--page)}
+
+    .hero{min-height:90svh;display:flex;flex-direction:column;justify-content:flex-end;padding:100px clamp(20px,5vw,64px) 72px;background:var(--warm-black);position:relative;isolation:isolate;overflow:hidden}
+    #hero-canvas{position:absolute;inset:0;z-index:1;opacity:0.55}
+    .hero-content{position:relative;z-index:2;max-width:920px}
+    .hero-kicker{letter-spacing:0.22em;text-transform:uppercase;font-size:11px;font-weight:500;margin-bottom:24px}
+    .hero h1{font-family:var(--serif);font-size:clamp(44px,7vw,96px);font-weight:400;line-height:0.94;color:var(--page);letter-spacing:-0.01em;margin:0}
+    .hero-tagline{max-width:600px;font-size:clamp(18px,2.2vw,26px);line-height:1.45;margin-top:28px;font-family:var(--serif);font-weight:400;font-style:italic}
+
+    .section{padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);max-width:920px;margin:0 auto}
+    .section-dark{background:var(--warm-black);padding:clamp(56px,8vw,100px) clamp(20px,5vw,64px);max-width:none}
+    .section-dark>.section-inner{max-width:920px;margin:0 auto}
+    .section-dark,.section-dark p{color:rgba(250,250,247,0.82)}
+    .section-dark h2,.section-dark h3,.section-dark h4{color:var(--page)}
+    .section-dark .module-label{color:var(--dust)}
+
+    .module-label{letter-spacing:0.2em;text-transform:uppercase;font-size:10px;font-weight:500;color:var(--ash);margin-bottom:12px}
+    .section h2{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:400;line-height:1.15;margin-bottom:32px;letter-spacing:-0.01em}
+    .section p{font-size:16px;margin-bottom:16px}
+
+    .insight-box{border-left:2px solid var(--cyan);padding:20px 24px;margin:36px 0;background:rgba(109,179,166,0.05);font-size:16px;line-height:1.7}
+    .section-dark .insight-box{background:rgba(109,179,166,0.08);border-color:var(--sage)}
+    .insight-box strong{display:block;margin-bottom:6px;font-family:var(--serif);font-size:18px;font-weight:400}
+
+    .hd-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:32px 0}
+    @media(max-width:640px){.hd-grid{grid-template-columns:1fr}}
+    .hd-card{padding:24px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .hd-card:hover{border-color:var(--stone)}
+    .section-dark .hd-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08)}
+    .section-dark .hd-card:hover{border-color:rgba(255,255,255,0.16)}
+    .hd-card h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:8px}
+    .hd-card p{font-size:14px;color:var(--slate);margin:0;line-height:1.6}
+    .section-dark .hd-card p{color:var(--dust)}
+
+    .rel-diagram{display:flex;gap:28px;align-items:center;justify-content:center;flex-wrap:wrap;padding:48px 0;margin:32px 0}
+    .rel-node{padding:32px 36px;text-align:center;border:1px solid var(--ink-line);background:var(--page);min-width:180px;transition:border-color 300ms ease}
+    .rel-node:hover{border-color:var(--stone)}
+    .rel-node h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px}
+    .rel-node p{font-size:13px;color:var(--slate);margin:0}
+    .rel-arrow{font-family:var(--serif);font-size:28px;color:var(--cyan);display:flex;align-items:center;gap:10px}
+    .rel-arrow span{font-size:12px;color:var(--ash);max-width:200px;line-height:1.45;font-family:var(--sans)}
+
+    .work-item{display:grid;grid-template-columns:260px 1fr;gap:32px;padding:40px 0;border-bottom:1px solid var(--ink-line);align-items:start}
+    .section-dark .work-item{border-color:rgba(255,255,255,0.08)}
+    @media(max-width:680px){.work-item{grid-template-columns:1fr}}
+    .work-item img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .work-item h4{font-family:var(--serif);font-size:22px;font-weight:400;margin-bottom:8px}
+    .work-item .work-meta{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ash);margin-bottom:12px;font-weight:500}
+    .work-item p{font-size:14px;color:var(--slate);line-height:1.7}
+
+    .takeaway-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    @media(max-width:760px){.takeaway-grid{grid-template-columns:1fr}}
+    .takeaway-card{padding:28px;border:1px solid var(--ink-line);background:var(--page);transition:border-color 300ms ease}
+    .takeaway-card:hover{border-color:var(--stone)}
+    .takeaway-card .take-num{font-family:var(--serif);font-size:40px;color:var(--cream);line-height:0.9;margin-bottom:14px;font-style:italic}
+    .takeaway-card h4{font-family:var(--serif);font-size:18px;font-weight:400;margin-bottom:8px;letter-spacing:-0.01em}
+    .takeaway-card p{font-size:14px;color:var(--slate);margin:0;line-height:1.65}
+
+    .toc{display:flex;flex-wrap:wrap;gap:6px;margin:36px 0;padding:0;list-style:none}
+    .toc a{display:inline-flex;align-items:center;min-height:32px;padding:0 14px;font-size:12px;font-weight:400;border:1px solid var(--ink-line);text-decoration:none;transition:background 200ms ease,color 200ms ease;letter-spacing:0.02em}
+    .toc a:hover{background:var(--ink);color:var(--page);border-color:var(--ink)}
+
+    .footer{padding:40px clamp(20px,5vw,64px);border-top:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ash);max-width:920px;margin:0 auto;font-weight:300}
+    .footer-brand{font-family:var(--serif);font-size:16px;color:var(--ink);font-style:italic}
+
+    .reveal{opacity:0;transform:translateY(36px);transition:opacity 800ms cubic-bezier(0.2,0,0,1),transform 800ms cubic-bezier(0.2,0,0,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" id="siteNav">
+  <a href="index.html" class="brand"><em>Creator OS</em>创造者生命说明书</a>
+  <div class="nav-links">
+    <a href="jonathan-ive.html" class="active">Jonathan Ive</a>
+    <a href="steve-jobs.html">Steve Jobs</a>
+    <a href="zaha-hadid.html">Zaha Hadid</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-kicker" style="color:var(--cyan)">创造者生命说明书 · 01</p>
+    <h1>Jonathan<br>Ive</h1>
+    <p class="hero-tagline">一个安静的人，如何设计出全世界最有存在感的产品？</p>
+  </div>
+</section>
+
+<section class="section">
+  <ul class="toc">
+    <li><a href="#who">01 他是谁</a></li>
+    <li><a href="#era">02 时代背景</a></li>
+    <li><a href="#story">03 生命故事</a></li>
+    <li><a href="#hd">04 人类图视角</a></li>
+    <li><a href="#relations">05 关键关系</a></li>
+    <li><a href="#works">06 代表作品</a></li>
+    <li><a href="#takeaway">07 创作者的启发</a></li>
+  </ul>
+</section>
+
+<section class="section reveal" id="who">
+  <p class="module-label">Module 01 · 他是谁</p>
+  <h2>把冰冷科技变成日常情感体验的苹果灵魂设计师</h2>
+  <p>Jonathan Ive，前苹果首席设计官，历史上获奖最多的工业设计师之一。他不是在设计产品，而是在设计「人与科技相处的方式」。从半透明糖果色 iMac 到全玻璃 iPhone 4，从单块铝锭切割的 MacBook 到环形飞碟般的 Apple Park，他的作品定义了整整一个时代的审美。</p>
+  <div class="insight-box">
+    <strong>核心特质</strong>
+    安静、克制、材料敏感、形式纯净。不像乔布斯用咆哮推动世界，Ive 用沉默和耐心让完美成为可能。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="era">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 02 · 他所处的时代</p>
+    <h2>从个人电脑到 AI 硬件，他参与定义了「人和机器如何相处」</h2>
+    <p>Ive 的职业生涯横跨三个时代：个人电脑时代（iMac 让电脑不再是灰色方盒）、移动设备时代（iPhone 重新定义手机）、以及正在到来的 AI 硬件时代（LoveFrom 正在与 OpenAI 合作）。</p>
+    <p>他的特别之处在于：他不是顺应时代的审美，而是定义时代的审美。当整个行业都在做黑色塑料的科技产品时，他拿出了半透明糖果色；当所有人都在做塑料手机时，他拿出了玻璃和金属。</p>
+    <p>他不是单纯做产品外壳，而是在回答每个时代最根本的问题：人与机器应该如何相处？</p>
+  </div>
+</section>
+
+<section class="section reveal" id="story">
+  <p class="module-label">Module 03 · 生命故事</p>
+  <h2>从伦敦郊区到苹果圣殿，设计是他的母语</h2>
+  <p>1967 年生于伦敦钦福特区，父亲是银器匠和教师，从小就教他「如何制作东西」。在纽卡斯尔理工学院学习工业设计期间，Ive 已经展现出对材料、触感和减法美学的执着。</p>
+  <p>1992 年加入苹果，但头五年几乎是个边缘人——他的设计被管理层忽视，公司正濒临破产。直到 1997 年乔布斯回归，两人第一次见面便产生灵魂共鸣。乔布斯看到了 Ive 作品中被埋没的天才，Ive 看到了一个愿意为设计付出一切的领袖。</p>
+  <p>从那一刻起，两人开始了 14 年的合作，创造出历史上最伟大的产品序列：iMac、iPod、iPhone、iPad、MacBook Air。</p>
+  <div class="insight-box">
+    <strong>生命母题</strong>
+    安静、克制、材料敏感、形式纯净、通过设计建立人与物的情感关系。Ive 证明了：最深刻的创新不一定来自喧嚣和争议，也可以来自安静、耐心和对美的绝对忠诚。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="hd">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 04 · 人类图视角</p>
+    <h2>理解 Jonathan Ive 的底层能量结构</h2>
+    <p style="color:var(--mist)">
+      人类图不是用来给一个人下定义，而是作为一种理解创造者能量模式的观察工具。以下分析基于公开出生数据（1967年2月27日，伦敦）的推测性解读。
+    </p>
+
+    <div class="hd-grid">
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>类型：Generator（生产者）</h4>
+        <p>持续的能量、对工作的深度投入、需要「回应」而非「发起」。Ive 最强大的创造力来自对材料和问题的直接回应——不是凭空想出一个设计，而是让设计从材料和过程中生长出来。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>内在权威：Sacral（荐骨回应）</h4>
+        <p>对事物的「身体反应」比大脑分析更可靠。Ive 的设计哲学「你无法通过分析来理解美」与荐骨权威高度吻合——他知道好设计不是分析出来的，而是「感受到的」。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>创造力模式：系统型 × 感知型</h4>
+        <p>将高度敏锐的审美感知与极致的系统性执行相结合。他能感知到 0.1 毫米的差异，同时管理数百人的设计团队和数千个零件——这种双重能力极为罕见。</p>
+      </div>
+      <div class="hd-card" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.1);">
+        <h4>关键天赋通道</h4>
+        <p>对材料、触感、形态有超乎常人的敏感性；具备将抽象情感转化为物理形态的能力；在深度专注中进入「心流」状态，创造出超越功能需求的、具有精神品质的作品。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="relations">
+  <p class="module-label">Module 05 · 关键关系</p>
+  <h2>乔布斯 × Ive：一场能量共振</h2>
+
+  <div class="rel-diagram">
+    <div class="rel-node">
+      <h4>Steve Jobs</h4>
+      <p>愿景、压力、审美方向<br>「现实扭曲力场」</p>
+    </div>
+    <div class="rel-arrow">
+      ⟷
+      <span>能量互补：<br>一个把世界往前推<br>一个把未来做成<br>可以握在手里的东西</span>
+    </div>
+    <div class="rel-node">
+      <h4>Jonathan Ive</h4>
+      <p>材料、形态、触感<br>「形式翻译器」</p>
+    </div>
+  </div>
+
+  <p>乔布斯提供愿景、压力、审美方向和不可动摇的标准。Ive 提供材料知识、形态直觉、触感研究和产品的诗意。乔布斯像一台强大的「意志发动机」，不断推动团队超越极限；Ive 像一个安静的「形式翻译器」，把乔布斯脑海中模糊的未来图景翻译成可以被触摸、可以被握在手里的现实。</p>
+  <p>这不是简单的「老板和员工」的关系，而是一种罕见的能量互补：乔布斯对未来的直觉 + Ive 对物质的感知 = 改变世界级的产品。</p>
+  <div class="insight-box">
+    <strong>乔布斯的评价</strong>
+    「他在苹果的运营权力仅次于我。没有人能告诉他该做什么——那是我的工作。」这不是控制，而是乔布斯对 Ive 最极致的信任：在审美领域，Ive 是绝对的权威。
+  </div>
+</section>
+
+<section class="section-dark reveal" id="works">
+  <div class="section-inner">
+    <p class="module-label" style="color:var(--ash)">Module 06 · 代表作品如何诞生</p>
+    <h2>每一个作品背后，都有人、时代和能量的交汇</h2>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IMac_G3_slot_loading_Indigo.jpg?width=600" alt="iMac G3" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">iMac G3（1998）</h4>
+        <p class="work-meta">诞生背景：苹果濒临破产 · 乔布斯归来第一年</p>
+        <p>当时的电脑都是米色塑料方盒。Ive 去了一家糖果工厂后受到启发，提出半透明彩色外壳。这个设计不仅是审美突破，更是苹果复兴的信号——它告诉世界：苹果回来了，而且不一样。</p>
+      </div>
+    </div>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_4_Black_no_shadow.jpg?width=600" alt="iPhone 4" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">iPhone 4（2010）</h4>
+        <p class="work-meta">诞生背景：智能手机大战 · 苹果重新定义「精密制造」</p>
+        <p>玻璃、金属、极简、精密制造——iPhone 4 是苹果审美哲学的一次集中爆发。不锈钢框架同时是天线的设计，让功能与形式合二为一；前后玻璃面板让手机第一次有了「珠宝感」。</p>
+      </div>
+    </div>
+
+    <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Apple_Park_2021.jpg?width=600" alt="Apple Park" loading="lazy">
+      <div>
+        <h4 style="color:var(--paper)">Apple Park（2017）</h4>
+        <p class="work-meta">诞生背景：乔布斯逝世后 · Ive 的新使命</p>
+        <p>环形建筑、「世界上最大的曲面玻璃」、9000棵树。Apple Park 是 Ive 从产品设计转向空间设计的标志。它不是办公室，而是一个「创造者圣地」——用建筑延续对完美、封闭与控制的执着。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section reveal" id="takeaway">
+  <p class="module-label">Module 07 · 给今天创作者的启发</p>
+  <h2>从 Ive 的生命操作系统里，我们能学到什么？</h2>
+
+  <div class="takeaway-grid">
+    <div class="takeaway-card">
+      <p class="take-num">01</p>
+      <h4>不是先问「我要做什么产品」，先问「我是谁」</h4>
+      <p>Ive 的每一件作品都是他审美哲学的外化。你的产品不是你的简历，是你底层能量结构的物理投射。</p>
+    </div>
+    <div class="takeaway-card">
+      <p class="take-num">02</p>
+      <h4>不要只找技能互补的人，要找能量互补的人</h4>
+      <p>乔布斯和 Ive 的关系证明：技能可以通过雇佣获得，但能量共振无法通过组织架构图设计。找到那个能「翻译你」的人。</p>
+    </div>
+    <div class="takeaway-card">
+      <p class="take-num">03</p>
+      <h4>真正的耐心是创造力的护城河</h4>
+      <p>Ive 在苹果头五年几乎被忽视，但他没有离开或改变自己的设计哲学。当对的人出现时，五年积累瞬间爆发。</p>
+    </div>
+    <div class="takeaway-card">
+      <p class="take-num">04</p>
+      <h4>不要追求「更多」，追求「更纯净」</h4>
+      <p>Ive 的设计哲学核心是减法——不是减少功能，而是让形式与功能达到一种不可再分的纯净状态。这对 AI 时代创作者尤其重要。</p>
+    </div>
+    <div class="takeaway-card">
+      <p class="take-num">05</p>
+      <h4>材料本身就是语言</h4>
+      <p>Ive 对材料的痴迷不是装腔作势，而是一种深度沟通：铝的冷感、玻璃的纯净、皮革的温暖——每种材料都在讲述不同的情感故事。</p>
+    </div>
+    <div class="takeaway-card">
+      <p class="take-num">06</p>
+      <h4>安静的人也能创造最有存在感的作品</h4>
+      <p>在一个崇拜外向、自我营销和「个人品牌」的时代，Ive 证明：极致的投入、对美的忠诚、安静的耐心，可以创造出比喧嚣更有存在感的作品。</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span class="footer-brand">Creator OS</span>
+  <span>← <a href="index.html">回到首页</a> · 创造者生命说明书 · AI时代创造者研究档案馆</span>
+</footer>
+
+<script>
+  (function() {
+    const nav = document.getElementById("siteNav");
+    window.addEventListener("scroll", function() { nav.classList.toggle("scrolled", window.scrollY > 80); });
+
+    document.querySelectorAll(".reveal").forEach(function(el) {
+      new IntersectionObserver(function(es) { es.forEach(function(e) { if (e.isIntersecting) e.target.classList.add("visible"); }); }, { threshold: 0.1 }).observe(el);
+    });
+
+    const canvas = document.getElementById("hero-canvas");
+    const ctx = canvas.getContext("2d");
+    let frame = 0;
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.clientWidth * dpr;
+      canvas.height = canvas.clientHeight * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    function draw() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      ctx.clearRect(0, 0, w, h);
+      frame += 0.006;
+      for (let i = 0; i < 36; i++) {
+        const y = (i / 35) * h;
+        const wave = Math.sin(i * 0.32 + frame) * 22;
+        ctx.beginPath();
+        ctx.moveTo(-80, y + wave);
+        for (let x = -80; x <= w + 80; x += 50) {
+          const t = x / w;
+          ctx.lineTo(x, y + Math.sin(t * 5 + frame + i * 0.18) * (10 + 20 * (1 - Math.abs(t - 0.5))));
+        }
+        ctx.strokeStyle = i % 5 === 0 ? "rgba(125, 242, 220, 0.28)" : "rgba(243, 245, 242, 0.06)";
+        ctx.lineWidth = i % 5 === 0 ? 0.9 : 0.5;
+        ctx.stroke();
+      }
+      requestAnimationFrame(draw);
+    }
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
+  })();
+</script>
+</body>
+</html>
