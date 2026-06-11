@@ -98,6 +98,11 @@
     .footer{padding:40px clamp(20px,5vw,64px);border-top:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ash);max-width:920px;margin:0 auto;font-weight:300}
     .footer-brand{font-family:var(--serif);font-size:16px;color:var(--ink);font-style:italic}
 
+
+    @media(max-width:680px){
+      .hero-content[style*="display:flex"]{flex-direction:column !important;align-items:flex-start !important}
+      .hero-content[style*="display:flex"] > div:first-child{width:clamp(140px,40vw,200px) !important;margin-bottom:20px}
+    }
     .reveal{opacity:0;transform:translateY(36px);transition:opacity 800ms cubic-bezier(0.2,0,0,1),transform 800ms cubic-bezier(0.2,0,0,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
   </style>
@@ -115,11 +120,15 @@
 
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="hero-content">
+  <div class="hero-content" style="display:flex;gap:clamp(24px,5vw,64px);align-items:flex-end;max-width:1040px">
+      <div style="flex-shrink:0;width:clamp(200px,20vw,320px)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/640px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg" alt="Steve Jobs portrait" style="width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(0.2) brightness(0.9);border:1px solid rgba(250,250,247,0.12)">
+      </div>
+      <div>
     <p class="hero-kicker" style="color:var(--gold)">创造者生命说明书 · 02</p>
     <h1>Steve<br>Jobs</h1>
     <p class="hero-tagline">用现实扭曲力场把未来拉进现在的极致产品哲学家。</p>
-  </div>
+  </div></div>
 </section>
 
 <section class="section">
@@ -222,7 +231,7 @@
     <h2>每一个产品都是一段生命状态的投射</h2>
 
     <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Macintosh_128k_transparency.png?width=600" alt="Macintosh" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Macintosh_128k_transparency.png/800px-Macintosh_128k_transparency.png" alt="Macintosh" loading="lazy">
       <div>
         <h4 style="color:var(--paper)">Macintosh（1984）</h4>
         <p class="work-meta">诞生背景：年轻的乔布斯 · 反叛 IBM · 改变世界</p>
@@ -231,7 +240,7 @@
     </div>
 
     <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IPod_family.png?width=600" alt="iPod" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/IPod_family.png/800px-IPod_family.png" alt="iPod" loading="lazy">
       <div>
         <h4 style="color:var(--paper)">iPod（2001）</h4>
         <p class="work-meta">诞生背景：回归后 · 音乐产业变革 · 「把1000首歌放进口袋」</p>
@@ -240,7 +249,7 @@
     </div>
 
     <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/IPhone_1st_Gen.svg?width=600" alt="iPhone" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/IPhone_1st_Gen.jpg/800px-IPhone_1st_Gen.jpg" alt="iPhone" loading="lazy">
       <div>
         <h4 style="color:var(--paper)">iPhone（2007）</h4>
         <p class="work-meta">诞生背景：病后 · 紧迫感 · 「重新发明手机」</p>

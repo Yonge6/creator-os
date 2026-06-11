@@ -98,6 +98,11 @@
     .footer{padding:40px clamp(20px,5vw,64px);border-top:1px solid var(--ink-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:12px;color:var(--ash);max-width:920px;margin:0 auto;font-weight:300}
     .footer-brand{font-family:var(--serif);font-size:16px;color:var(--ink);font-style:italic}
 
+
+    @media(max-width:680px){
+      .hero-content[style*="display:flex"]{flex-direction:column !important;align-items:flex-start !important}
+      .hero-content[style*="display:flex"] > div:first-child{width:clamp(140px,40vw,200px) !important;margin-bottom:20px}
+    }
     .reveal{opacity:0;transform:translateY(36px);transition:opacity 800ms cubic-bezier(0.2,0,0,1),transform 800ms cubic-bezier(0.2,0,0,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
   </style>
@@ -115,11 +120,15 @@
 
 <section class="hero">
   <canvas id="hero-canvas"></canvas>
-  <div class="hero-content">
+  <div class="hero-content" style="display:flex;gap:clamp(24px,5vw,64px);align-items:flex-end;max-width:1040px">
+      <div style="flex-shrink:0;width:clamp(200px,20vw,320px)">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Zaha_Hadid_in_Heydar_Aliyev_Cultural_center_in_Baku.jpg/640px-Zaha_Hadid_in_Heydar_Aliyev_Cultural_center_in_Baku.jpg" alt="Zaha Hadid portrait" style="width:100%;aspect-ratio:3/4;object-fit:cover;filter:grayscale(0.15) brightness(0.92);border:1px solid rgba(250,250,247,0.12)">
+      </div>
+      <div>
     <p class="hero-kicker" style="color:var(--oxide)">创造者生命说明书 · 03</p>
     <h1>Zaha<br>Hadid</h1>
     <p class="hero-tagline">用曲线打破直线、在男性主导的建筑世界撕开裂缝的女性创造者。</p>
-  </div>
+  </div></div>
 </section>
 
 <section class="section">
@@ -223,7 +232,7 @@
     <h2>从「无法建造」到「必须建造」</h2>
 
     <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Heydar%20Aliyev%20Center%201.1.jpg?width=600" alt="Heydar Aliyev Center" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Heydar_Aliyev_Center_1.1.jpg/800px-Heydar_Aliyev_Center_1.1.jpg" alt="Heydar Aliyev Center" loading="lazy">
       <div>
         <h4 style="color:var(--paper)">阿利耶夫文化中心（2012）</h4>
         <p class="work-meta">诞生背景：参数化成熟期 · Hadid 风格的巅峰</p>
@@ -232,7 +241,7 @@
     </div>
 
     <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Guangzhou%20Opera%20House%20Night.jpg?width=600" alt="Guangzhou Opera House" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Guangzhou_Opera_House_Night.jpg/800px-Guangzhou_Opera_House_Night.jpg" alt="Guangzhou Opera House" loading="lazy">
       <div>
         <h4 style="color:var(--paper)">广州歌剧院（2010）</h4>
         <p class="work-meta">诞生背景：中国城市化浪潮 · Hadid 进入亚洲</p>
@@ -241,7 +250,7 @@
     </div>
 
     <div class="work-item" style="border-color:rgba(255,255,255,0.1);">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/MAXXI_interior.jpg?width=600" alt="MAXXI" loading="lazy">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/MAXXI_interior.jpg/800px-MAXXI_interior.jpg" alt="MAXXI" loading="lazy">
       <div>
         <h4 style="color:var(--paper)">MAXXI 博物馆（2010）</h4>
         <p class="work-meta">诞生背景：获普利兹克奖后 · 建筑语言的成熟</p>
